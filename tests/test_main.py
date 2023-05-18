@@ -39,6 +39,7 @@ def test_auth_get(client):
     assert response.status_code == 200
 
 def test_auth_post(client):
+    '''correct auth'''
     user = 'jaroslavbelina.ml@seznam.cz'
     response_login = client.post("/login", data={
         "user": user,
@@ -50,4 +51,10 @@ def test_auth_post(client):
     response = client.post('/auth', data={
         "key": key
     })
-    assert response.status_code == 302
+    assert response.request.path == "/account"
+
+    '''Incorrect auth'''
+    response = client.post('/auth', data={
+        "key": '.'
+    })
+    assert response.request.path == "/login"
