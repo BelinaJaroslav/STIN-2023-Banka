@@ -16,6 +16,9 @@
       </select>
       </form>
     <d1>
+        <p>
+            Your balance is {{ balance }} {{ currency }}
+        </p>
         {% for transaction in transactions %}
         <div>
         <p>{{ transaction[1] }}: {{ transaction[2] }} {{currency}} </p>

@@ -1,6 +1,12 @@
+import sys
+
+sys.path.append('..')
+
 import os
 import pathlib
 import smtplib
+
+
 from flask import Flask, render_template, request, redirect, url_for, session, make_response
 import requests
 import datetime
@@ -15,6 +21,8 @@ import TransferService
 app = Flask(__name__)
 
 secret_key = None
+
+print(sys.path)
 
 users = {"jaroslavbelina.ml@seznam.cz": User("jaroslavbelina.ml@seznam.cz", "Jaroslav", "Belina", "123456789")}
 user_acc = users["jaroslavbelina.ml@seznam.cz"].account
@@ -77,12 +85,17 @@ def account_get():
     account = users[user].account
     secret_key = request.cookies.get('key')
     currency = request.cookies.get('currency')
+    try:
+        balance = account[currency]
+    except:
+        pass
 
     if secret_key != users[user].key:
         return redirect('/login')
 
+    # noinspection PyUnreachableCode
     return render_template("account.html", currencies=account.keys(), transactions=account.get_transactions(currency),
-                           currency=currency)
+                           currency=currency, balance=balance)
 
 
 @app.route('/account', methods=['POST'])
@@ -102,6 +115,8 @@ def account_transaction():
 def serve_currencies():
     resp = make_response(redirect('/account'))
     currency = request.form['currency']
+    if currency == 'Select currency':
+        currency = 'CZK'
     resp.set_cookie('currency', currency)
     return resp
 
