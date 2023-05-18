@@ -17,7 +17,7 @@ class MemoryDict(dict):
         self.memory = []
 
     def __setitem__(self, key, value):
-        self.memory.append((key, datetime.now(), value - self.get(key, 0)))
+        self.memory.append((key, datetime.now().strftime("%Y.%m.%d  %H:%M:%S"), value - self.get(key, 0)))
         super().__setitem__(key, value)
 
     def get_transactions(self, key):
