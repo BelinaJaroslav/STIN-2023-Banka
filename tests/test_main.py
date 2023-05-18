@@ -50,11 +50,11 @@ def test_auth_post(client):
     client.set_cookie('localhost', 'key', key)
     response = client.post('/auth', data={
         "key": key
-    })
+    }, follow_redirects=True)
     assert response.request.path == "/account"
 
     '''Incorrect auth'''
     response = client.post('/auth', data={
         "key": '.'
-    })
+    }, follow_redirects=True)
     assert response.request.path == "/login"
