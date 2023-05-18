@@ -21,7 +21,7 @@
         </p>
         {% for transaction in transactions %}
         <div>
-        <p>{{ transaction[1] }}: {{ transaction[2] }} {{currency}} </p>
+        <p>{{ transaction[1] }}: {{ transaction[2] |round(1, 'floor')}} {{currency }} </p>
         </div>
         {% endfor %}
     </d1>
