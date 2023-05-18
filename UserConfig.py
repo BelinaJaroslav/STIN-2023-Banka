@@ -26,7 +26,7 @@ def define_users():
 
     #User 2
     email = "jaroslav.belina@tul.cz"
-    users = {email: User(email, "Jaroslav", "Bělina", "987654321")}
+    users |= {email: User(email, "Jaroslav", "Bělina", "987654321")}
     user_acc = users[email].account
     user_acc['CZK'] = 500
     user_acc['CZK'] += 500
