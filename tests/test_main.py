@@ -3,7 +3,7 @@ import pytest
 import main
 
 @pytest.fixture
-def client():
+def app():
     app = Flask(__name__)
     app.config['TESTING'] = True
 
