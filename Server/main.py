@@ -3,18 +3,9 @@ import sys
 sys.path.append('..')
 
 import os
-import pathlib
-import smtplib
-
-
-from flask import Flask, render_template, request, redirect, url_for, session, make_response
-import requests
-import datetime
-import random
-import string
+from flask import Flask, render_template, request, redirect, make_response
 import smtplib
 from email.mime.text import MIMEText
-import json
 from User import User
 import TransferService
 
@@ -142,3 +133,7 @@ def send_mail(user, secretkey):
     s.login("stintest@outlook.com", "Burnerpassword")
     s.sendmail(sender, [users[user].email], msg.as_string())
     s.quit()
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
