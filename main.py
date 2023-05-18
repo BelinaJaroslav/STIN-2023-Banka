@@ -104,7 +104,6 @@ def serve_currencies():
 
 def generate_and_store_key(user):
     secret_key = os.urandom(8).hex()
-    secret_key = '1'
     users[user].key = secret_key
     return secret_key
 
