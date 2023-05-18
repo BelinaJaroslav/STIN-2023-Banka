@@ -33,3 +33,21 @@ def test_login_post(client):
             "pwd": "123456789"
             })
     assert response.status_code == 302
+
+def test_auth_get(client):
+    response = client.get('/auth')
+    assert response.status_code == 200
+
+def test_auth_post(client):
+    user = 'jaroslavbelina.ml@seznam.cz'
+    response_login = client.post("/login", data={
+        "user": user,
+        "pwd": "123456789"
+    })
+    key = main.users['jaroslavbelina.ml@seznam.cz'].key
+    client.set_cookie('localhost', 'user', user)
+    client.set_cookie('localhost', 'key', key)
+    response = client.post('/auth', data={
+        "key": key
+    })
+    assert response.status_code == 302
