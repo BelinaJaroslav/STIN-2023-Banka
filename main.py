@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append('..')
+#sys.path.append('')
 
 import os
 from flask import Flask, render_template, request, redirect, make_response

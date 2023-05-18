@@ -1,4 +1,4 @@
-from Server.User import User
+from User import User
 
 
 def test_user_creation():

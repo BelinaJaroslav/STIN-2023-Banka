@@ -1,8 +1,6 @@
 import pytest
-from Server.TransferService import *
-from Server.User import User
-from decimal import Decimal
-from Server.User import User
+from TransferService import *
+from User import User
 
 
 @pytest.fixture
