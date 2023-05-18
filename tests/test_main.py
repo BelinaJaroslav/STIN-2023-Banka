@@ -24,7 +24,7 @@ def client(app):
 
 def test_login_get(client):
     response = client.get('/login')
-    assert response.statuscode == 200
+    assert response.status_code == 200
 
 
 def test_login_post(client):
@@ -32,4 +32,4 @@ def test_login_post(client):
             "user": "jaroslavbelina.ml@seznam.cz",
             "pwd": "123456789"
             })
-    assert response.statuscode == 302
+    assert response.status_code == 302
