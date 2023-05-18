@@ -1,6 +1,4 @@
-from decimal import Decimal
-from datetime import datetime
-from Server import ExchangeRateService as ERS
+import ExchangeRateService as ERS
 
 
 def currency_to_czk(amount, currency):

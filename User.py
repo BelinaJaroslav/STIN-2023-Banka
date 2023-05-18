@@ -1,5 +1,7 @@
 from collections import defaultdict
 from datetime import datetime
+
+
 class User:
     def __init__(self, email, name, surname, password):
         self.email = email
@@ -8,6 +10,7 @@ class User:
         self.surname = surname
         self.password = password
         self.key = None
+
 
 class MemoryDict(dict):
     def __init__(self):
