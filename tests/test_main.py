@@ -28,11 +28,20 @@ def test_login_get(client):
 
 
 def test_login_post(client):
+    user = 'jaroslavbelina.ml@seznam.cz'
+    '''correct user'''
     response = client.post("/login", data={
-            "user": "jaroslavbelina.ml@seznam.cz",
+            "user": user,
             "pwd": "123456789"
-            })
-    assert response.status_code == 302
+            }, follow_redirects=True)
+    assert response.request.path == "/auth"
+
+    '''incorrect user'''
+    response = client.post("/login", data={
+        "user": user + 'bogus',
+        "pwd": "123456789"
+    }, follow_redirects=True)
+    assert response.request.path == "/login"
 
 def test_auth_get(client):
     response = client.get('/auth')
