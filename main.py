@@ -7,28 +7,18 @@ from flask import Flask, render_template, request, redirect, make_response
 import smtplib
 from email.mime.text import MIMEText
 from User import User
+import UserConfig
 import TransferService
 
 app = Flask(__name__)
 
 secret_key = None
 
-print(sys.path)
 
-users = {"jaroslavbelina.ml@seznam.cz": User("jaroslavbelina.ml@seznam.cz", "Jaroslav", "Belina", "123456789")}
-user_acc = users["jaroslavbelina.ml@seznam.cz"].account
-user_acc['CZK'] = 500
-user_acc['CZK'] += 500
-user_acc['CZK'] -= 500
-user_acc['CZK'] += 1000
-user_acc['EUR'] = 500
-user_acc['EUR'] -= 100
-
+users = UserConfig.load_users()
 sender = "stintest@outlook.com"
 pw = "Burnerpassword"
 
-
-# client = new SmtpClient("smtp-mail.outlook.com", 587)
 
 @app.route('/login', methods=['GET'])
 def login_get():
