@@ -1,0 +1,38 @@
+# This workflow will install Python dependencies and run tests
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Pytest
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        # Setup
+        python -m pip install --upgrade pip
+        sudo apt-get update
+        # Suite
+        pip install pytest
+        pip install coverage
+        # Application requirmenets
+        pip install flask
+        pip install requests
+        # Additional requirements
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test with pytest
+      run: |
+        coverage run -m pytest tests
+        coverage report --omit=tests/*
