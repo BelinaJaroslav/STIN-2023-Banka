@@ -35,3 +35,4 @@ def define_users():
     user_acc['JPY'] = 500000
     user_acc['JPY'] -= 100000
 
+    return users
