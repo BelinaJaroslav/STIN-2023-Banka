@@ -12,7 +12,7 @@ def load_users():
 
 
 def define_users():
-    #User 1
+    # User 1
     email = "jaroslavbelina.ml@seznam.cz"
     users = {email: User(email, "Jaroslav", "Bělina", "123456789")}
     user_acc = users[email].account
@@ -23,8 +23,7 @@ def define_users():
     user_acc['EUR'] = 500
     user_acc['EUR'] -= 100
 
-
-    #User 2
+    # User 2
     email = "jaroslav.belina@tul.cz"
     users |= {email: User(email, "Jaroslav", "Bělina", "987654321")}
     user_acc = users[email].account

@@ -9,11 +9,18 @@ from email.mime.text import MIMEText
 from User import User
 import UserConfig
 import TransferService
+import ExchangeRateService as ERS
 
 app = Flask(__name__)
 
 secret_key = None
 
+exchange_rates = ERS.get_exchange_rates()
+currency_list = []
+for currency in exchange_rates:
+    currency_list.append(currency)
+
+print(currency_list)
 
 users = UserConfig.load_users()
 sender = "stintest@outlook.com"
@@ -67,7 +74,7 @@ def account_get():
     secret_key = request.cookies.get('key')
     currency = request.cookies.get('currency')
     try:
-        balance = account[currency]
+        balance = round(account[currency],2)
     except:
         pass
 
@@ -76,7 +83,7 @@ def account_get():
 
     # noinspection PyUnreachableCode
     return render_template("account.html", currencies=account.keys(), transactions=account.get_transactions(currency),
-                           currency=currency, balance=balance)
+                           currency=currency, balance=balance, currency_list=currency_list)
 
 
 @app.route('/account', methods=['POST'])
@@ -85,9 +92,10 @@ def account_transaction():
     user = users[user_mail]
     key = request.cookies.get('key')
     amount = float(request.form['amount'])
-    currency = request.cookies.get('currency')
+    currency = request.form['transaction_currency']
+    if currency not in currency_list:
+        currency = request.cookies.get('currency')
     TransferService.process_payment(user, amount, currency)
-
     resp = make_response(redirect('/account'))
     return resp
 
