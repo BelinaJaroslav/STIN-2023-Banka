@@ -73,6 +73,9 @@ def account_get():
     account = users[user].account
     secret_key = request.cookies.get('key')
     currency = request.cookies.get('currency')
+
+    success = request.cookies.get('success')
+
     try:
         balance = round(account[currency],2)
     except:
@@ -83,7 +86,7 @@ def account_get():
 
     # noinspection PyUnreachableCode
     return render_template("account.html", currencies=account.keys(), transactions=account.get_transactions(currency),
-                           currency=currency, balance=balance, currency_list=currency_list)
+                           currency=currency, balance=balance, currency_list=currency_list, success=success)
 
 
 @app.route('/account', methods=['POST'])
@@ -95,8 +98,12 @@ def account_transaction():
     currency = request.form['transaction_currency']
     if currency not in currency_list:
         currency = request.cookies.get('currency')
-    TransferService.process_payment(user, amount, currency)
+
+    success = TransferService.process_payment(user, amount, currency)
     resp = make_response(redirect('/account'))
+
+    resp.set_cookie('success', str(success))
+
     return resp
 
 

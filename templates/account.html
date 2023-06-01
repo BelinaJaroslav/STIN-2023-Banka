@@ -12,6 +12,9 @@
       </select>
          </p>
          <p><input type = 'submit' value = 'Confirm transaction'/></p>
+         {%if success == 'False' %} <p><h3> Not enough funds </h3></p> {% endif %}
+          {%if success == 'True' %} <p><h3> Enough funds </h3></p> {% endif %}
+      <p>
       </form>
       <p><h3>Account history</h3></p>
       <form action = /submit_currency method = "POST">
