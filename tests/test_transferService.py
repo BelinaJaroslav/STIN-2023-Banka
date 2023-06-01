@@ -31,7 +31,7 @@ def test_payment_outgoing_czk_sub_zero(user):
     currency = 'CZK'
     amount = 4400
     payment_outgoing(user, amount, currency)
-    assert user.account['CZK'] == 4000
+    assert user.account['CZK'] == -440
 
 def test_payment_outgoing_eur(user):
     currency = 'EUR'

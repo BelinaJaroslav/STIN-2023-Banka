@@ -3,9 +3,17 @@
     <body>
       <form action = "/account" method = "POST">
          <p><h3>Account management</h3></p>
-         <p><input type = 'number' value="0" step="0.01" name = 'amount'/></p>
+         <p><input type = 'number' value="0" step="0.01" name = 'amount'/>
+            <select name="transaction_currency">
+            <option selected="selected">Select currency</option>
+            {% for currency in currency_list %}
+                <option value="{{currency}}">{{currency}}</option>
+            {% endfor %}
+      </select>
+         </p>
          <p><input type = 'submit' value = 'Confirm transaction'/></p>
       </form>
+      <p><h3>Account history</h3></p>
       <form action = /submit_currency method = "POST">
           <select name="currency">
             <option selected="selected">Select currency</option>
