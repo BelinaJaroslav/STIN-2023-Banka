@@ -5,6 +5,8 @@ INTEREST_RATE = 0.1
 
 def currency_to_czk(amount, currency):
     """Převod částky 'amount' z 'currency' na CZK podle 'exchange_rates'."""
+    if currency == 'CZK':
+        return round(amount, 2)
     exchange_rates = ERS.get_exchange_rates()
     return round((amount * exchange_rates[currency]), 2)
 
@@ -12,8 +14,10 @@ def currency_to_czk(amount, currency):
 def process_payment(user, amount, currency):
     if amount > 0:
         payment_incoming(user, amount, currency)
+        return True
     else:
-        payment_outgoing(user, -amount, currency)
+        return payment_outgoing(user, -amount, currency)
+
 
 
 def payment_incoming(user, amount, currency):
