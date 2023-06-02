@@ -4,12 +4,3 @@
 
 Stránka: http://185.255.131.144:5000/login
 
-
-deployment:
-ssh jara@185.255.131.144
-
-cat /etc/systemd/system/stin.service
-
-sudo heslo: asdeasdc
-
-sudo crontab -e
